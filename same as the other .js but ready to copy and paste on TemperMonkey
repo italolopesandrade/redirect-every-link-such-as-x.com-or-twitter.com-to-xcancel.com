@@ -1,0 +1,26 @@
+// ==UserScript==
+// @name         Redirecionar Twitter para xcancel
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Redireciona automaticamente links de x.com e twitter.com para xcancel.com
+// @author       ChatGPT
+// @match        *://x.com/*
+// @match        *://www.x.com/*
+// @match        *://twitter.com/*
+// @match        *://www.twitter.com/*
+// @run-at       document-start
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const currentUrl = window.location.href;
+    const pattern = /^https?:\/\/(www\.)?(x\.com|twitter\.com)(\/.*)?$/i;
+
+    if (pattern.test(currentUrl)) {
+        const newUrl = currentUrl.replace(/^https?:\/\/(www\.)?(x\.com|twitter\.com)/i, 'https://xcancel.com');
+        if (currentUrl !== newUrl) {
+            window.location.replace(newUrl);
+        }
+    }
+})();
